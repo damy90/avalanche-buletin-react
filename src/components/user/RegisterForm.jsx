@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
-import requester from '../../infrastructure/requester';
-import observer from '../../infrastructure/observer';
+
+import withFormManager from './../../hocs/withFormManager';
 import authentication from '../../infrastructure/authentication';
 import userModel from '../../models/userModel';
-import withFormManager from './../../hocs/withFormManager';
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
     render = () => {
         return (
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h1>Log in</h1>
+                <h1>Register</h1>
                 <form onSubmit={this.props.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">Email address</label>
@@ -18,6 +17,10 @@ class LoginForm extends Component {
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input onChange={this.props.handleChange} name="password" type="password" className="form-control" id="password" placeholder="Password"/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="passwordRepeat">Repeat password</label>
+                        <input onChange={this.props.handleChange} name="passwordRepeat" type="password" className="form-control" id="passwordRepeat" placeholder="Password"/>
                     </div>
                     <div className="form-check">
                         <button type="submit" className="btn btn-primary">Submit</button>
@@ -29,4 +32,4 @@ class LoginForm extends Component {
     }
 }
 
-export default withFormManager(LoginForm, userModel, authentication.logIn, '/');
+export default withFormManager(RegisterForm, userModel, authentication.register, '/');

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import TestsMap from '../common/Map';
 import reuqester from '../../infrastructure/requester';
-//import requester from '../../infrastructure/requester';
-import LoginForm from './../user/LoginForm';
 
 export default class Home extends Component {
     constructor(props) {
@@ -30,15 +28,11 @@ export default class Home extends Component {
 
     render = () => {
         return (
-            <div>
-                <LoginForm {...this.props}/>
-                <TestsMap
-                    ref={instance => {
-                        this.map = instance;
-                    }}
-                />
-            </div>
-            
+            <TestsMap
+                ref={instance => {
+                    this.map = instance;
+                }}
+            />
         )
     }
 }
