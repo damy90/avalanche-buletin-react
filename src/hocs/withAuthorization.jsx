@@ -9,8 +9,7 @@ export default function withAuthorization(WrappedComponent, role) {
         }
         render = () => {
             return (<div>
-                {this.state.isAuthorized ? null: <h1>You are not authorized!</h1>}
-                <WrappedComponent isAuthorized={this.state.isAuthorized} {...this.props}/>
+                {this.state.isAuthorized ? <WrappedComponent isAuthorized={this.state.isAuthorized} {...this.props}/>: <h1>You are not authorized!</h1>}
             </div>)
         }
     }

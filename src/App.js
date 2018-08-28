@@ -10,6 +10,9 @@ import LoginForm from './components/user/LoginForm';
 import Logout from './components/user/Logout';
 import RegisterForm from './components/user/RegisterForm';
 import TestDetails from './components/tests/TestDetails';
+import Account from './components/user/Account';
+import Users from './components/admin/Users';
+import Tests from './components/admin/Tests';
 
 class App extends Component {
   componentWillMount = () =>{
@@ -35,7 +38,9 @@ class App extends Component {
           <Route path="/log-in" exact component={LoginForm}/>
           <Route path='/logout' component={Logout} />
           <Route path='/register' component={RegisterForm} />
-          {/* <Route path='/logout' component={Logout} /> */}
+          <Route path='/user/:id' component={Account} />
+          <Route path='/admin/users' component={Users} />
+          <Route path='/admin/tests' component={Tests} />
         </div>
       </div>
       

@@ -22,6 +22,8 @@ export default class TestDetails  extends Component {
         super(props)
 
         this.state = INITIAL_STATE;
+
+        this.handleDelete = this.handleDelete.bind(this);
     }
     componentWillMount = () => {
         let isAdmin = authentication.isAuthorized('Admin');
@@ -38,7 +40,7 @@ export default class TestDetails  extends Component {
                     .then((user) => {
                         this.setState({username: user.username});
 
-                        if(user.username === sessionStorage.get('username')) {
+                        if(user.username === sessionStorage.getItem('username')) {
                             this.setState({isOwner: true});
                         }
                     })
@@ -52,6 +54,14 @@ export default class TestDetails  extends Component {
         this.setState({id});
     }
 
+    handleDelete = () => {
+        testService.remove.send(this.state._id)
+            .then(testService.remove.success)
+            .then(()=>{
+                this.props.history.push('/')})
+            .catch(testService.remove.fail)
+    }
+
     Administration = () => {
         return (
             <div>
@@ -61,7 +71,9 @@ export default class TestDetails  extends Component {
                         Edit
                 </NavLink>
                 &nbsp;
-                <button type="button" className="btn btn-danger">Delete</button>
+                <button type="button" className="btn btn-danger" onClick={this.handleDelete}>
+                    Delete
+                </button>
             </div>
         )
     }

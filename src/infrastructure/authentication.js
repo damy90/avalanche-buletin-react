@@ -1,7 +1,14 @@
 import requester from "./requester";
-import React, {Component} from 'react';
 import observer from "./observer";
-import history from "./history";
+
+function requestFail(res) {
+    observer.trigger(observer.events.notification, { 
+        type: 'error', 
+        message: res.responseJSON.description
+    });
+    
+    this.setState({ username: '', password: '' });
+}
 
 let userRoles = JSON.parse(sessionStorage.getItem('userRoles'));
 let logIn = {
@@ -13,7 +20,7 @@ let logIn = {
             };
         }
 
-        return requester.post('user', 'login', 'basic', credentials)
+        return requester.post('user', 'login', 'basic', credentials);
     },
     success: res => {
         observer.trigger(observer.events.loginUser, res.username);
@@ -61,6 +68,28 @@ let getUser = {
 
         this.setState({ username: '', password: '' });
     }
+}
+
+let getAllUsers = {
+    send: id => requester.get('user', '', 'kinvey'),
+    fail: function(res) {
+        observer.trigger(observer.events.notification, { 
+            type: 'error', 
+            message: res.responseJSON.description
+        });
+
+        this.setState({ username: '', password: '' });
+    }
+}
+
+let remove = {
+    send: id => {
+        return requester.remove('user', id, 'kinvey');
+    },
+    success: res => {
+        observer.trigger(observer.events.notification, {type: 'success', message: 'Entity deleted.'})
+    },
+    fail: requestFail
 }
 
 function isAuthorized (role) {
@@ -138,5 +167,7 @@ export default {
     isAuthorizedPath,
     logIn,
     register,
-    getUser
+    getUser,
+    getAllUsers,
+    remove
 }

@@ -37,6 +37,24 @@ export default class Navigation extends Component {
                 <RegisteredMenu/>
             </ul>)
     }
+
+    AdminPanel = () => {
+        if(!authentication.isAuthorized('Admin')) {
+            return null;
+        }
+
+        return (
+            <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Administration
+                </a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <NavLink className="dropdown-item" to="/admin/users">Users</NavLink>
+                <NavLink className="dropdown-item" to="/admin/tests">Tests</NavLink>
+                </div>
+            </li>
+        )
+    }
     
     render = () => {
         return(
@@ -63,21 +81,15 @@ export default class Navigation extends Component {
                         {authentication.isRegistered() ? (<li className="nav-item">
                             <NavLink className="nav-link" to="/submit-report">Submit report</NavLink>
                         </li>) : null}
-                        {/* <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                            </a>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li> */}
+                        <this.AdminPanel/>
                     </ul>
 
                     <p className="nav navbar-text navbar-right">
-                        Signed in as <a href="#" className="navbar-link">{this.state.username}</a></p>
+                        Signed in as 
+                        <NavLink to="/user/_me" className="navbar-link">
+                            {this.state.username}
+                        </NavLink>
+                    </p>
                     
                     <this.UserMenu/>
                 </div>

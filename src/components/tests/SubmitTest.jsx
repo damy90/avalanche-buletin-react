@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import "eonasdan-bootstrap-datetimepicker";
 import observer from '../../infrastructure/observer';
-import requester from '../../infrastructure/requester';
-import authentication from '../../infrastructure/authentication';
-import withAuthorization from './../../hocs/withAuthorization';
-import TestsMap from './../common/Map';
+import withAuthorization from '../../hocs/withAuthorization';
+import TestsMap from '../common/Map';
 import testService from '../../services/testService';
-import withFormManager from './../../hocs/withFormManager';
+import withFormManager from '../../hocs/withFormManager';
 
 const INITIAL_STATE = {
     lat: '',
@@ -101,11 +99,11 @@ class SubmitTest extends Component {
                     <fieldset disabled={!this.props.isAuthorized}>
                         <div className="form-group">
                             <label htmlFor="latitude">latitude</label>
-                            <input onChange={this.handleChange} name='lat' type="number" className="form-control" id="latitude" value={this.state.lat}/>
+                            <input onChange={this.handleChange} name='lat' type="text" className="form-control" id="latitude" value={this.state.lat}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="longitude">latitude</label>
-                            <input onChange={this.handleChange} name='lon' type="number" className="form-control" id="longitude"  value={this.state.lon}/>
+                            <input onChange={this.handleChange} name='lon' type="text" className="form-control" id="longitude"  value={this.state.lon}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="place">Place</label>

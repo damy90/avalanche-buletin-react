@@ -22,7 +22,7 @@ let create = {
 }
 let edit = {
     send: data =>{
-        return requester.put('appdata', 'avalanche-tests/' + data.id, 'kinvey', data);
+        return requester.update('appdata', 'avalanche-tests/' + data.id, 'kinvey', data);
     },
     fail: requestFail
 }
@@ -33,8 +33,27 @@ let details = {
     },
     fail: requestFail
 }
+
+let remove = {
+    send: id => {
+        return requester.remove('appdata', 'avalanche-tests/' + id, 'kinvey');
+    },
+    success: res => {
+        observer.trigger(observer.events.notification, {type: 'success', message: 'Entity deleted.'})
+    },
+    fail: requestFail
+}
+
+let all = {
+    send: () => {
+        return requester.get('appdata', 'avalanche-tests', 'kinvey');
+    },
+    fail: requestFail
+}
 export default {
     create,
     edit,
-    details
+    details,
+    remove,
+    all
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TestsMap from '../common/Map';
 import reuqester from '../../infrastructure/requester';
+import testService from '../../services/testService';
 
 export default class Home extends Component {
     constructor(props) {
@@ -20,8 +21,9 @@ export default class Home extends Component {
     }
 
     getPosts = () => {
-        reuqester.get('appdata', 'avalanche-tests', 'kinvey')
+        testService.all.send()
             .then(this.onData)
+            .catch(testService.all.fail)
     }
 
     componentDidMount = () => this.getPosts();
