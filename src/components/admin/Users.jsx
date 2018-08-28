@@ -57,18 +57,22 @@ class Users extends Component {
 
     render = () => {
         return (
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">User</th>
-                        <th scope="col">Registered on</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <this.Data/>
-                </tbody>
-            </table>
+            <div>
+                <h1>Users administration</h1>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Registered on</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <this.Data/>
+                    </tbody>
+                </table>
+            </div>
+            
         )
     }
 }

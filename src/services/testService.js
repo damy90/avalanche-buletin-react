@@ -44,9 +44,14 @@ let remove = {
     fail: requestFail
 }
 
-let all = {
-    send: () => {
-        return requester.get('appdata', 'avalanche-tests', 'kinvey');
+let get = {
+    send: (query) => {
+        let endPoint = 'avalanche-tests';
+        if(query && typeof query!== 'string') {
+            query = '/?query=' + JSON.stringify(query);
+        }
+        endPoint += query;
+        return requester.get('appdata', endPoint, 'kinvey');
     },
     fail: requestFail
 }
@@ -55,5 +60,5 @@ export default {
     edit,
     details,
     remove,
-    all
+    get
 }

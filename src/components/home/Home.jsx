@@ -21,9 +21,9 @@ export default class Home extends Component {
     }
 
     getPosts = () => {
-        testService.all.send()
+        testService.get.send()
             .then(this.onData)
-            .catch(testService.all.fail)
+            .catch(testService.get.fail)
     }
 
     componentDidMount = () => this.getPosts();

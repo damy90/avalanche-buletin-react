@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import authentication from '../../infrastructure/authentication';
 import { NavLink } from 'react-router-dom';
+import Tests from '../tests/TestsManagement';
 
 export default class Account extends Component {
     componentWillMount = () => {
@@ -65,6 +66,15 @@ export default class Account extends Component {
         return null;
     }
 
+    MyTests = () => {
+        if(this.state._id){
+            console.log(this.state._id)
+            return <Tests userId={this.state._id }/>
+        }
+
+        return null
+    }
+
     render = () => {
         return (
             <div>
@@ -74,6 +84,7 @@ export default class Account extends Component {
                 {/* TODO: get role names */}
                 <this.UserOptions/>
                 <this.AdminOptions/>
+                <this.MyTests/>
             </div>
         )
     }

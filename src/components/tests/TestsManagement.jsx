@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import testService from '../../services/testService';
 
 let role = 'Admin';
-class Tests extends Component {
+export default class Tests extends Component {
     constructor(props) {
         super(props);
 
@@ -15,12 +15,16 @@ class Tests extends Component {
     }
 
     componentWillMount = () => {
-        testService.all.send()
+        let query;
+        if(!this.state.isAuthorized && this.props.userId) {
+            query= {"_acl":{"creator":this.props.userId}}
+        }
+        testService.get.send(query)
             .then(tests => {
                 this.setState({tests})
                 this.userIds = {};
             })
-            .catch(testService.all.fail);
+            .catch(testService.get.fail);
 
         // Map user ids to user names (bulk)
         authentication.getAllUsers.send()
@@ -81,23 +85,26 @@ class Tests extends Component {
 
     render = () => {
         return (
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Place</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Danger level</th>
-                        <th scope="col">Details</th>
-                        <th scope="col">User</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <this.Data/>
-                </tbody>
-            </table>
+            <div>
+                <h1>Tests administration</h1>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Place</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Danger level</th>
+                            <th scope="col">Details</th>
+                            <th scope="col">User</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <this.Data/>
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }
 
-export default withAuthorization(Tests, role);
+//withAuthorization(Tests, role);
