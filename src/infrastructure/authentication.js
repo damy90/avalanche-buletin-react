@@ -50,6 +50,19 @@ let register = {
         this.setState({ username: '', password: '' });
     }
 }
+
+let getUser = {
+    send: id => requester.get('user', id, 'kinvey'),
+    fail: function(res) {
+        observer.trigger(observer.events.notification, { 
+            type: 'error', 
+            message: res.responseJSON.description
+        });
+
+        this.setState({ username: '', password: '' });
+    }
+}
+
 function isAuthorized (role) {
     return isLoggedIn() && userHasRole(role);
 }
@@ -124,5 +137,6 @@ export default {
     isRegistered,
     isAuthorizedPath,
     logIn,
-    register
+    register,
+    getUser
 }

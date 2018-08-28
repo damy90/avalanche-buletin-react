@@ -9,6 +9,7 @@ import authentication from './infrastructure/authentication';
 import LoginForm from './components/user/LoginForm';
 import Logout from './components/user/Logout';
 import RegisterForm from './components/user/RegisterForm';
+import TestDetails from './components/tests/TestDetails';
 
 class App extends Component {
   componentWillMount = () =>{
@@ -29,6 +30,8 @@ class App extends Component {
           {/* <Header username={this.username}/> */}
           <Route path='/' exact component={Home} />
           <Route path="/submit-report" exact component={SubmitTest}/>
+          <Route path="/report/:id/edit" exact component={SubmitTest}/>
+          <Route path="/report/:id" exact component={TestDetails}/>
           <Route path="/log-in" exact component={LoginForm}/>
           <Route path='/logout' component={Logout} />
           <Route path='/register' component={RegisterForm} />

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Map, TileLayer, Marker, Popup, Icon } from 'react-leaflet';
 import Leaflet from 'leaflet';
+import { NavLink } from 'react-router-dom';
 
 const MyPopupMarker = ({ children, ...props }) => (
   <Marker {...props}>
@@ -9,6 +10,14 @@ const MyPopupMarker = ({ children, ...props }) => (
   </Marker>
 );
 
+const PopUpContent = (content, id, authorId) => (
+    <div>
+        <p>Details:</p>
+        <p>{content}</p>
+        <NavLink className="nav-link" to={"/report/" + id}>Details</NavLink>
+    </div>
+    
+)
 // const MyLocation = ({marker, refmarker}) => (
 //     <Marker {...marker} ref={refmarker}>
 //       <Popup>{marker.children}</Popup>
@@ -128,7 +137,7 @@ export default class TestsMap extends React.Component {
       return {
         key: marker._id,
         position,
-        children: marker.content,
+        children: PopUpContent(marker.content, marker._id),
         icon: markerIcons[marker.dangerLevel - 1]
       };
 
