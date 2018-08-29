@@ -38,7 +38,7 @@ export default class Account extends Component {
             return (
                 <NavLink type="button" 
                     className="btn btn-primary" 
-                    to={"change-password" + this.state._id + '/edit'}>
+                    to={"/change-password"}>
                         Change password
                 </NavLink>
             )
@@ -55,10 +55,10 @@ export default class Account extends Component {
                     <button type="button" className="btn btn-danger" onClick={this.handleDelete}>
                         Delete user
                     </button>
-                    &nbsp;
+                    {/* &nbsp;
                     <button type="button" className="btn btn-warning" onClick={this.handleSuspend}>
                         Suspend user
-                    </button>
+                    </button> */}
                 </div>
             )
         }

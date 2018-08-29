@@ -5,15 +5,13 @@ import authentication from '../../infrastructure/authentication';
 
 export default class Logout extends Component {
     logout = () => {
-        requester.post('user', '_logout', 'kinvey')
-            .then(res => {
-                sessionStorage.removeItem('authtoken');
-                sessionStorage.removeItem('username');
-                sessionStorage.removeItem('roles');
-                authentication.logIn.send({})
-                    .then(authentication.logIn.success)
-                    .catch(authentication.logIn.fail);
-            });
+        authentication.logout.send()
+            .then(authentication.logout.finally)
+            .catch((res) => {
+                authentication.logout.fail(res);
+                return authentication.logout.finally(res);
+            })
+            
     }
 
     render = () => {

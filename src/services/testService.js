@@ -46,11 +46,12 @@ let remove = {
 
 let get = {
     send: (query) => {
-        let endPoint = 'avalanche-tests';
+        let endPoint = 'avalanche-tests/';
         if(query && typeof query!== 'string') {
-            query = '/?query=' + JSON.stringify(query);
+            query = '?query=' + JSON.stringify(query);
+            endPoint += query;
         }
-        endPoint += query;
+
         return requester.get('appdata', endPoint, 'kinvey');
     },
     fail: requestFail

@@ -14,6 +14,7 @@ import Account from './components/user/Account';
 import Users from './components/admin/Users';
 import Tests from './components/tests/TestsManagement';
 import withAuthorization from './hocs/withAuthorization';
+import ChangePasswordForm from './components/user/ChangePasswordForm';
 
 class App extends Component {
   componentWillMount = () =>{
@@ -40,6 +41,7 @@ class App extends Component {
           <Route path='/logout' component={Logout} />
           <Route path='/register' component={RegisterForm} />
           <Route path='/user/:id' component={Account} />
+          <Route path='/change-password' component={withAuthorization(ChangePasswordForm, 'Registered')} />
           <Route path='/admin/users' component={Users} />
           <Route path='/admin/tests' component={withAuthorization(Tests, 'Admin')} />
         </div>

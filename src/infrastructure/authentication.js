@@ -6,8 +6,6 @@ function requestFail(res) {
         type: 'error', 
         message: res.responseJSON.description
     });
-    
-    this.setState({ username: '', password: '' });
 }
 
 let userRoles = JSON.parse(sessionStorage.getItem('userRoles'));
@@ -58,6 +56,30 @@ let register = {
     }
 }
 
+let update = {
+    send: data => {
+        return logIn.send({username: sessionStorage.getItem('username'), password: data.password})
+            .then((res) => requester.update('user', res._id, 'kinvey', {password: data.newPassword}))
+            .then(logout.finally);
+    },
+    success: res => {
+        observer.trigger(observer.events.notification, {type: 'success', message: 'Profile updated.'})
+    },
+    fail: requestFail
+}
+
+let logout = {
+    send: () => requester.post('user', '_logout', 'kinvey'),
+    fail: requestFail,
+    finally: () => {
+        sessionStorage.removeItem('authtoken');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('roles');
+        logIn.send({})
+            .then(logIn.success)
+            .catch(logIn.fail);
+    },
+}
 let getUser = {
     send: id => requester.get('user', id, 'kinvey'),
     fail: function(res) {
@@ -169,5 +191,7 @@ export default {
     register,
     getUser,
     getAllUsers,
-    remove
+    remove,
+    update,
+    logout
 }

@@ -43,10 +43,10 @@ class Users extends Component {
                         <button type="button" className="btn btn-danger" onClick={() => this.handleDelete(user._id)}>
                             Delete user
                         </button>
-                        &nbsp;
+                        {/* &nbsp;
                         <button type="button" className="btn btn-warning" onClick={() => this.handleSuspend(user._id)}>
                             Suspend user
-                        </button>
+                        </button> */}
                     </td>
                 </tr>
             )
