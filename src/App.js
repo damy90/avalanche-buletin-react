@@ -15,6 +15,9 @@ import Users from './components/admin/Users';
 import Tests from './components/tests/TestsManagement';
 import withAuthorization from './hocs/withAuthorization';
 import ChangePasswordForm from './components/user/ChangePasswordForm';
+import withFormManager from './hocs/withFormManager';
+import testModel from './models/testModel';
+import testService from './services/testService';
 
 class App extends Component {
   componentWillMount = () =>{
@@ -34,8 +37,8 @@ class App extends Component {
         <div className="App">
           {/* <Header username={this.username}/> */}
           <Route path='/' exact component={Home} />
-          <Route path="/submit-report" exact component={SubmitTest}/>
-          <Route path="/report/:id/edit" exact component={SubmitTest}/>
+          <Route path="/submit-report" exact component={withFormManager(SubmitTest, testModel, testService.create, '/')}/>
+          <Route path="/report/:id/edit" exact component={withFormManager(SubmitTest, testModel, testService.edit, '/')}/>
           <Route path="/report/:id" exact component={TestDetails}/>
           <Route path="/log-in" exact component={LoginForm}/>
           <Route path='/logout' component={Logout} />

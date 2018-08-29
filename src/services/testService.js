@@ -16,13 +16,15 @@ let create = {
     },
     success: res => {
         observer.trigger(observer.events.notification, {type: 'success', message: 'Test submited.'})
-        this.props.history.push('/');
     },
     fail: requestFail
 }
 let edit = {
     send: data =>{
         return requester.update('appdata', 'avalanche-tests/' + data.id, 'kinvey', data);
+    },
+    success: res => {
+        observer.trigger(observer.events.notification, {type: 'success', message: 'Test updated.'})
     },
     fail: requestFail
 }

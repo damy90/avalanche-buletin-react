@@ -28,6 +28,7 @@ export default function withFormManager(Form, model, submitter, redirect) {
             this.fail = this.props.fail || submitter.fail.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
             this.handleChange = this.handleChange.bind(this);
+            this.setState = this.setState.bind(this);
         }
 
         componentWillReceiveProps = (nextProps) => {
@@ -67,11 +68,12 @@ export default function withFormManager(Form, model, submitter, redirect) {
         }
 
         render = () => {
-            console.log('FormManager', this.state);
+            //console.log('FormManager', this.state);
             return (<Form
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
-                {...this.state} />
+                setState={this.setState}
+                {...this.state} {...this.props}/>
             )
         }
     }
