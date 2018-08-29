@@ -61,6 +61,9 @@ class SubmitTest extends Component {
                     <h1>
                         {this.isNew ? 'Submit' : 'Edit'} avalanche test
                     </h1>
+                    <span className="text-danger" if="form-error">
+                        {this.props.error}
+                    </span>
                     <fieldset disabled={!this.props.isAuthorized}>
                         <div className="form-group">
                             <label htmlFor="latitude">latitude</label>

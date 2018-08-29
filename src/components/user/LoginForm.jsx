@@ -11,6 +11,9 @@ class LoginForm extends Component {
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <h1>Log in</h1>
                 <form onSubmit={this.props.handleSubmit}>
+                    <span className="text-danger" if="form-error">
+                        {this.props.error}
+                    </span>
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">Email address</label>
                         <input  onChange={this.props.handleChange} name="username" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>

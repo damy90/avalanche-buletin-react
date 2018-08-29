@@ -18,8 +18,15 @@ import ChangePasswordForm from './components/user/ChangePasswordForm';
 import withFormManager from './hocs/withFormManager';
 import testModel from './models/testModel';
 import testService from './services/testService';
+import observer from './infrastructure/observer';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+    observer.subscribe(observer.events.notification, this.notify);
+  }
   componentWillMount = () =>{
     // To view public info from kinvey you need to be logged in as anonymous
     if(!authentication.isLoggedIn()){
@@ -29,13 +36,28 @@ class App extends Component {
         .catch(authentication.logIn.fail);
     }
   }
-//className="hidden"
+
+  componentDidCatch(error, info) {     
+    this.setState({ info });
+    this.notify({type: 'error', message: error})
+  }
+
+  notify = (notification) => {
+    if(notification.type === 'error') {
+      this.setState({error: notification.message});
+
+      setTimeout(() => this.setState({error: ''}), 3000);
+    }
+  }
+
   render() {
     return (
       <div>
         <Navigation/>
         <div className="App">
-          {/* <Header username={this.username}/> */}
+          <span className="text-danger">
+              {this.state.error}
+          </span>
           <Route path='/' exact component={Home} />
           <Route path="/submit-report" exact component={withFormManager(SubmitTest, testModel, testService.create, '/')}/>
           <Route path="/report/:id/edit" exact component={withFormManager(SubmitTest, testModel, testService.edit, '/')}/>

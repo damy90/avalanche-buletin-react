@@ -58,15 +58,6 @@ export default class Navigation extends Component {
     
     render = () => {
         return(
-            // <div id="menu">
-            //     <div className="title">Navigation</div>
-            //     <NavLink className="nav" to='/'>Home</NavLink>
-            //     <NavLink className="nav" to='/catalog' activeClassName='active'>Catalog</NavLink>
-            //     <NavLink className="nav" to="/create">Create Post</NavLink>
-            //     {/* <NavLink className="nav" href="#" data-target="PostCreate">Create Post</NavLink>
-            //     <NavLink className="nav" href="#" id="linkMyPosts" data-target="MyPosts">My Posts</NavLink>
-            //     <NavLink className="nav" href="#" data-target="About">About</NavLink> */}
-            // </div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <a className="navbar-brand" href="#">Navbar</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +78,7 @@ export default class Navigation extends Component {
                     <p className="nav navbar-text navbar-right">
                         Signed in as 
                         <NavLink to="/user/_me" className="navbar-link">
-                            {this.state.username}
+                            &nbsp;{this.state.username}
                         </NavLink>
                     </p>
                     

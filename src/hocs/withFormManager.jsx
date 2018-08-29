@@ -33,7 +33,7 @@ export default function withFormManager(Form, model, submitter, redirect) {
 
         componentWillReceiveProps = (nextProps) => {
             let newState = {};
-            for (let key of Object.keys(nextProps.extraState)) {
+            for (let key of Object.keys(nextProps.extraState || {})) {
                 newState[key] = nextProps.extraState[key];
             }
 
@@ -55,7 +55,8 @@ export default function withFormManager(Form, model, submitter, redirect) {
             if (model.validate) {
                 let error = model.validate(data);
                 if (error) {
-                    this.setState({ error })
+                    this.setState({ error });
+                    return;
                 }
             }
 
